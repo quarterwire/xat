@@ -1,6 +1,16 @@
 <script lang="ts">
-	import '../app.css';
-	let { children } = $props();
+  import '../app.css'
+  import '@fortawesome/fontawesome-free/css/all.min.css'
+  import Header from '../components/Header.svelte'
+  import Right from '../components/Right.svelte'
+  import Main from '../components/Main.svelte'
+  let { children } = $props()
 </script>
 
-{@render children()}
+<div class="container h-screen mx-auto">
+  <div class="flex flex-row justify-center">
+    <div class=""><Header /></div>
+    <div class=""><Main /></div>
+    <div class=""><Right /></div>
+  </div>
+</div>
