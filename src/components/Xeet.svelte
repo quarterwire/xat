@@ -1,5 +1,20 @@
-<script>
-  export let message
+<script lang="ts">
+  import { onMount } from 'svelte'
+
+  export let message: string
+
+  let image: string = ''
+
+  async function getImage() {
+    const res = await fetch(`https://api.thecatapi.com/v1/images/search`).then(
+      (res) => res.json()
+    )
+    image = res[0].url
+  }
+
+  onMount(() => {
+    getImage()
+  })
 </script>
 
 <div
@@ -35,11 +50,7 @@
       {message}
     </p>
     <div class="flex my-3 mr-2 rounded-2xl border border-gray-400">
-      <img
-        class="rounded-2xl w-full"
-        src="https://www.dailypaws.com/thmb/ZHs0nxwPjwixC4YkqyRcO9DB2bg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/striped-cat-playing-flower-552781357-2000-f8b1f07162594830bdba8a24e2268ad6.jpg"
-        alt=""
-      />
+      <img class="rounded-2xl w-full" src={image} alt="" />
     </div>
     <div class="flex gap-44">
       <div

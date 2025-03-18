@@ -1,6 +1,20 @@
-<script>
-  import Right from './Right.svelte'
+<script lang="ts">
+  import { onMount } from 'svelte'
   import Xeet from './Xeet.svelte'
+
+  let catFacts: string[] = []
+
+  async function getCatFact() {
+    const requests = Array.from({ length: 6 }, () =>
+      fetch(`https://catfact.ninja/fact`).then((res) => res.json())
+    )
+    const facts = await Promise.all(requests)
+    catFacts = facts.map((fact) => fact.fact) // Ensure reactivity by reassigning the array
+  }
+
+  onMount(() => {
+    getCatFact()
+  })
 </script>
 
 <main class="h-screen w-160">
@@ -14,6 +28,8 @@
     </h2>
     <i class="fa-solid fa-paw text-2xl text-primary"></i>
   </div>
-  <Xeet message="Buna!!!!" />
-  <Xeet message="Hawwwooo!!!" />
+
+  {#each catFacts as catFact}
+    <Xeet message={catFact} />
+  {/each}
 </main>

@@ -9,8 +9,8 @@
 
 <div class="container h-screen mx-auto">
   <div class="flex flex-row justify-center">
-    <div class=""><Header /></div>
-    <div class=""><Main /></div>
-    <div class=""><Right /></div>
+    <div><Header /></div>
+    <div><Main /></div>
+    <div><Right /></div>
   </div>
 </div>
